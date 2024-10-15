@@ -28,9 +28,9 @@ time.sleep(3) # 사람이 입력한 것처럼 보이도록 시간 주기
 # time.sleep(2)
 
 # 2
-shopping_text_element = driver.find_element(By.CLASS_NAME, "MyView-module__login_text___G0Dzv")
-shopping_text = shopping_text_element.text
-driver.find_element(By.ID, "query").send_keys(shopping_text)
+login_text_element = driver.find_element(By.CLASS_NAME, "MyView-module__login_text___G0Dzv")
+login_text = login_text_element.text
+driver.find_element(By.ID, "query").send_keys(login_text)
 time.sleep(2)
 
 # driver.find_element(By.CSS_SELECTOR, "#search-btn").click()
@@ -38,4 +38,4 @@ driver.find_element(By.ID, "query").send_keys(Keys.ENTER)
 time.sleep(2)
 
 driver.save_screenshot("naver_로그인.png")
-#driver.quit()
+# driver.quit()
