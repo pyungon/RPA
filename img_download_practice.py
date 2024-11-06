@@ -11,6 +11,7 @@ import os
 service = Service(executable_path="chromedriver.exe")
 driver = webdriver.Chrome()
 driver.get("https://www.google.co.kr/imghp?h1=ko&ogb1")
+time.sleep(3) 
 
 input_element = driver.find_element(By.CLASS_NAME, "gLFyf")
 input_element.send_keys("Mercedes" + Keys.ENTER)
