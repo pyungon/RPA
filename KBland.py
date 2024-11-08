@@ -59,7 +59,7 @@ while attempt < MAX_RETRIES:
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".tdbold"))
         )
 
-        area_data = '999'  # 임의의 면적값
+        area_data = '109'  # 임의의 면적값
         cnt = 0
         area_list = []
         for element in area_elements:
