@@ -32,7 +32,7 @@ url = "https://rtech.or.kr/MarketPrice/getMarketPriceDetail.do?categoryCd=1&aptS
 driver.get(url)
 
 # 캡차 이미지 수집 횟수 설정
-capture_count = 100
+capture_count = 200
 
 for attempt in range(capture_count):
     try:
@@ -81,3 +81,4 @@ for attempt in range(capture_count):
         
 print("캡차 이미지 수집 완료")
 driver.quit()
+

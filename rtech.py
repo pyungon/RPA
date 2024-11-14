@@ -16,16 +16,16 @@ from PIL import Image
 import os
 
 # SSL 인증서 검증 무시 설정
-ssl._create_default_https_context = ssl._create_unverified_context
+# ssl._create_default_https_context = ssl._create_unverified_context
 
 # 최대 시도 횟수 설정
 MAX_RETRIES = 3
 attempt = 0
 
-# 캡차 이미지 저장 경로 설정
-save_path = r"C:\시세조사\캡챠"
-if not os.path.exists(save_path):
-    os.makedirs(save_path)
+# # 캡차 이미지 저장 경로 설정
+# save_path = r"C:\시세조사\캡챠"
+# if not os.path.exists(save_path):
+#     os.makedirs(save_path)
 
 while attempt < MAX_RETRIES:
     try:
@@ -101,37 +101,37 @@ while attempt < MAX_RETRIES:
         select_ho = Select(select_ho)
         select_ho.select_by_index(1)
 
-        # 10. 보안문자 (캡차 이미지 다운로드)
-        # 보안문자 (캡차 이미지 다운로드 스크린샷 방식)
-        captcha_img = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.ID, "captchaImg"))
-        )
+        # # 10. 보안문자 (캡차 이미지 다운로드)
+        # # 보안문자 (캡차 이미지 다운로드 스크린샷 방식)
+        # captcha_img = WebDriverWait(driver, 20).until(
+        #     EC.presence_of_element_located((By.ID, "captchaImg"))
+        # )
 
-        # 전체 페이지 스크린샷 찍기
-        screenshot_path = os.path.join(save_path, "full_screenshot.png")
-        driver.save_screenshot(screenshot_path)
+        # # 전체 페이지 스크린샷 찍기
+        # screenshot_path = os.path.join(save_path, "full_screenshot.png")
+        # driver.save_screenshot(screenshot_path)
         
-        # 캡차 이미지의 위치 및 크기 가져오기
-        location = captcha_img.location
-        size = captcha_img.size
-        # 캡차 이미지 위치 및 크기 출력 (디버깅용)
-        print(f"캡차 이미지 위치: {location}")
-        print(f"캡차 이미지 크기: {size}")
+        # # 캡차 이미지의 위치 및 크기 가져오기
+        # location = captcha_img.location
+        # size = captcha_img.size
+        # # 캡차 이미지 위치 및 크기 출력 (디버깅용)
+        # print(f"캡차 이미지 위치: {location}")
+        # print(f"캡차 이미지 크기: {size}")
                 
 
-        # PIL로 스크린샷을 열어 위치에 따라 캡차 이미지를 자르기
-        with Image.open(screenshot_path) as img:
-            left = location['x'] + 149
-            top = location['y'] + 90
-            right = left + size['width']
-            bottom = top + size['height']
+        # # PIL로 스크린샷을 열어 위치에 따라 캡차 이미지를 자르기
+        # with Image.open(screenshot_path) as img:
+        #     left = location['x'] + 149
+        #     top = location['y'] + 90
+        #     right = left + size['width']
+        #     bottom = top + size['height']
             
-            captcha = img.crop((left, top, right, bottom))
+        #     captcha = img.crop((left, top, right, bottom))
 
-            # 캡차 이미지 파일명 생성
-            captcha_filename = os.path.join(save_path, f"captcha_image_{datetime.now().strftime('%Y%m%d%H%M%S')}.png")
-            captcha.save(captcha_filename)
-            print(f"캡차 이미지 {captcha_filename} 다운로드 완료")
+        #     # 캡차 이미지 파일명 생성
+        #     captcha_filename = os.path.join(save_path, f"captcha_image_{datetime.now().strftime('%Y%m%d%H%M%S')}.png")
+        #     captcha.save(captcha_filename)
+        #     print(f"캡차 이미지 {captcha_filename} 다운로드 완료")
 
         # 마지막 대기
         time.sleep(2)
