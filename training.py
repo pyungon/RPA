@@ -42,3 +42,5 @@ downsample_factor = 4
 
 # Maximum length of any captcha in the dataset
 max_length = max([len(label) for label in labels])
+
+# git test
