@@ -8,6 +8,7 @@ import keras
 from tensorflow.python.framework import ops
 from keras import layers
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+from sklearn.metrics import accuracy_score
 
 # Path to the data directory
 data_dir = Path("C:/python/RPA/캡챠")
@@ -290,3 +291,35 @@ plt.show()
 #         ax.set_title(text)
 #         ax.set_axis_off()
 # plt.show()
+
+# 예측 정확도 계산 함수
+def calculate_accuracy(prediction_model, validation_dataset):
+    total_correct = 0
+    total_samples = 0
+    
+    for batch in validation_dataset:
+        batch_images = batch["image"]
+        batch_labels = batch["label"]
+
+        # 예측 수행
+        preds = prediction_model.predict(batch_images)
+        pred_texts = decode_batch_predictions(preds)  # 예측 결과 디코딩
+
+        # 실제 라벨
+        orig_texts = []
+        for label in batch_labels:
+            label = tf.strings.reduce_join(num_to_char(label)).numpy().decode("utf-8")
+            orig_texts.append(label)
+
+        # 예측과 실제 텍스트 비교
+        for pred_text, orig_text in zip(pred_texts, orig_texts):
+            if pred_text == orig_text:
+                total_correct += 1
+            total_samples += 1
+
+    accuracy = total_correct / total_samples
+    return accuracy
+
+# 정확도 계산
+accuracy = calculate_accuracy(prediction_model, validation_dataset)
+print(f"Validation Accuracy: {accuracy * 100:.2f}%")
